@@ -1,7 +1,6 @@
 package mata62;
 
 public class Exemplar {
-<<<<<<< HEAD
 	private String codigoDoLivro;
 	private String codigo;
 	private Status status;
@@ -25,10 +24,5 @@ public class Exemplar {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-=======
-	private int codigoDoLivro;
-	private int codigo;
-	private Status status;
->>>>>>> refs/remotes/origin/master
 	
 }
