@@ -1,15 +1,12 @@
 package mata62;
 
-public class resCommand implements Command {
+public class obsCommand implements Command {
 	private BancoDeDados base;
 	
-	
-	public resCommand(BancoDeDados base) {
-		super();
+	public obsCommand(BancoDeDados base) {
 		this.base = base;
 	}
-
-
+	
 	@Override
 	public void execute(Object arg) {
 		// TODO Auto-generated method stub

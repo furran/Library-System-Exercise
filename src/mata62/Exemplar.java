@@ -1,28 +1,45 @@
 package mata62;
 
 public class Exemplar {
-	private String codigoDoLivro;
+	private Livro livro;
 	private String codigo;
-	private Status status;
+	private boolean disponivel;
 	
+	public Exemplar(Livro livro,String codigo, boolean status) {
+		this.livro = livro;
+		this.codigo = codigo;
+		this.disponivel = status;
+	}
 	
-	public String getCodigoDoLivro() {
-		return codigoDoLivro;
+	public Exemplar(Livro livro,String codigo) {
+		this.livro = livro;
+		this.codigo = codigo;
+		this.disponivel = true;
 	}
-	public void setCodigoDoLivro(String codigoDoLivro) {
-		this.codigoDoLivro = codigoDoLivro;
+	
+	public String getTitulo() {
+		return livro.getTitulo();
 	}
+	
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public Status getStatus() {
-		return status;
+	public boolean isDisponivel() {
+		return disponivel;
 	}
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setDisponivel(boolean status) {
+		this.disponivel = status;
 	}
 	
 }

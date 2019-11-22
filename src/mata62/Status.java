@@ -1,7 +1,6 @@
 package mata62;
 
 public enum Status {
-	INDISPONIVEL,
+	EMPRESTADO,
 	DISPONIVEL,
-	RESERVADO
 }
