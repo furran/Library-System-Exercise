@@ -3,28 +3,11 @@ package mata62;
 public class UsuarioProfessor extends Usuario{
 	
 	private static int tempoDeEmprestimo = 7;
-	
+	private static int limiteDeEmprestimos = Integer.MAX_VALUE;
 	public UsuarioProfessor(String codigo, String nome) {
-		super(codigo, nome);
+		super(codigo, nome, new EmprestimoHighPrio());
 	}
 
-	@Override
-	public void realizarEmprestimo(Exemplar exemplar) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void realizarReserva(Livro livro) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void realizarDevolucao(Emprestimo emprestimo) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void consulta() {
@@ -35,6 +18,11 @@ public class UsuarioProfessor extends Usuario{
 	@Override
 	public int getTempoDeEmprestimo() {
 		return tempoDeEmprestimo;
+	}
+
+	@Override
+	public int getQuantidadeMaximaDeEmprestimos() {
+		return limiteDeEmprestimos;
 	}
 
 

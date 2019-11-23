@@ -10,6 +10,7 @@ public class SistemaFacade {
 	private SistemaFacade() {
 		cmds = new HashMap<String,Command>();
 		base = BancoDeDados.getInstance();
+		initCMDS();
 	}
 	
 	private void initCMDS() {

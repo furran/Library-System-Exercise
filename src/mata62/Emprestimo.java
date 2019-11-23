@@ -3,7 +3,7 @@ package mata62;
 import java.util.Calendar;
 
 public class Emprestimo {
-	
+	private Livro livro;
 	private Exemplar exemplar;
 	private Usuario user;
 	private Calendar dataDoEmprestimo;
@@ -31,8 +31,47 @@ public class Emprestimo {
 		this.finalizado = false;
 	}
 	
-	public String consulta() {
-		return 
+	public void consulta() {
+		
+	}
+
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public Exemplar getExemplar() {
+		return exemplar;
+	}
+	
+	public String getCodigoDoExemplar() {
+		return exemplar.getCodigo();
+	}
+	
+	public String getCodigoDoLivro() {
+		return livro.getTitulo();
+	}
+
+
+	public Usuario getUser() {
+		return user;
+	}
+
+
+	public Calendar getDataDoEmprestimo() {
+		return dataDoEmprestimo;
+	}
+
+
+	public Calendar getDataDaDevolucao() {
+		return dataDaDevolucao;
+	}
+
+	public boolean isFinalizado() {
+		return finalizado;
+	}
+	
+	public void setFinalizado(boolean stat) {
+		this.finalizado = stat;
 	}
 	
 }

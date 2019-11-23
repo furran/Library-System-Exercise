@@ -10,4 +10,16 @@ public class Reserva {
 		this.livro = livro;
 		this.dataDaSolicitacao = Calendar.getInstance();
 	}
+	
+	public String getCodigoDoLivro() {
+		return livro.getCodigo();
+	}
+	
+	public Livro getLivro() {
+		return livro;
+	}
+	
+	public Calendar getDataDaSolicitacao() {
+		return dataDaSolicitacao;
+	}
 }

@@ -2,15 +2,16 @@ package mata62;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class BancoDeDados {
 	private static BancoDeDados instance;
-	private HashMap<String,Livro> livros; //mapeia codigo do livro para o livro.
-	private HashMap<String,Usuario> usuarios; //mapeia o codigo do usuario para o usuario.
+	private TreeMap<String,Livro> livros; //mapeia codigo do livro para o livro.
+	private TreeMap<String,Usuario> usuarios; //mapeia o codigo do usuario para o usuario.
 	
 	private BancoDeDados() {
-		livros = new HashMap<String,Livro>();
-		usuarios = new HashMap<String,Usuario>();
+		livros = new TreeMap<String,Livro>();
+		usuarios = new TreeMap<String,Usuario>();
 	}
 	
 	public static BancoDeDados getInstance() {
@@ -18,6 +19,16 @@ public class BancoDeDados {
 			instance = new BancoDeDados();
 		}
 		return instance;
+	}
+	
+	public void realizarEmprestimo(String codigoDoUsuario,String codigoDoLivro) {
+		Livro livro = findLivro(codigoDoLivro);
+		Usuario user = findUsuario(codigoDoUsuario);
+		user.registrarEmprestimo(livro);
+	}
+	
+	public void realizarDevolucao() {
+		
 	}
 
 	public void addLivro(Livro livro) {

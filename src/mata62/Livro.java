@@ -1,7 +1,7 @@
 package mata62;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Livro {
 	private String codigo;
@@ -10,10 +10,10 @@ public class Livro {
 	private String autores;
 	private String edicao;
 	private String ano;
-	
+
 	private ArrayList<Exemplar> exemplares;
-	private HashMap<String,Emprestimo> emprestimos;
-	private ArrayList<Usuario> reservas; //usuarios com reservas desse livro
+	private ArrayList<Emprestimo> emprestimos; // mapeia codigo do exemplar para emprestimo ativo desse livro
+	private ArrayList<Reserva> reservas; //lista de reserva desse livro
 	
 	public Livro(String codigo, String titulo, String editora, String autores, String edicao, String ano) {
 		this.codigo = codigo;
@@ -24,8 +24,8 @@ public class Livro {
 		this.ano = ano;
 		
 		exemplares = new ArrayList<Exemplar>();
-		emprestimos = new HashMap<String,Emprestimo>();
-		reservas = new ArrayList<Usuario>();
+		emprestimos = new ArrayList<Emprestimo>();
+		reservas = new ArrayList<Reserva>();
 	}
 	
 	public void addExemplar(Exemplar e) {
@@ -36,8 +36,26 @@ public class Livro {
 		exemplares.remove(e);
 	}
 	
-	public void addReserva(Usuario user) {
-		reservas.add(user);
+	public void registrarReserva(Reserva r) {
+		reservas.add(r);
+	}
+	
+	private void addEmprestimo(Emprestimo e) {
+		emprestimos.add(e);
+	}
+	
+	private void removeEmprestimo(Emprestimo e) {
+		emprestimos.remove(e);
+	}
+	
+	public void registrarEmprestimo(Emprestimo e) {
+		e.getExemplar().setDisponivel(false);
+		addEmprestimo(e);
+	}
+	
+	public void realizarDevolucao(Emprestimo e) {
+		e.getExemplar().setDisponivel(true);
+		removeEmprestimo(e);
 	}
 	
 	public Exemplar findExemplar(String codigo) {
@@ -47,6 +65,13 @@ public class Livro {
 			if(e.getCodigo().equals(codigo)) {
 				return e;
 			}
+		}
+		return null;
+	}
+	
+	public Exemplar getExemplarDisponivel() {
+		for(Exemplar e : exemplares) {
+			if(e.isDisponivel()) return e;
 		}
 		return null;
 	}
@@ -79,7 +104,7 @@ public class Livro {
 		return exemplares;
 	}
 
-	public ArrayList<Usuario> getReservas() {
+	public ArrayList<Reserva> getReservas() {
 		return reservas;
 	}
 
