@@ -140,9 +140,9 @@ public class BancoDeDados {
 			System.out.println("   + "+exemplar.consulta());
 			if(exemplar.isDisponivel()==false) {
 				empr = livro.findEmprestimo(exemplar.getCodigo());
-				System.out.println("     - "+empr.getUsuario().getNome()
-						+"| Data do Emprestimo: "+dateFormat.format(empr.getDataDoEmprestimo().getTime())
-						+"| Data de Devolucao: "+dateFormat.format(empr.getDataDaDevolucao().getTime()));
+				System.out.println("     - Usuario: "+empr.getUsuario().getNome()
+						+" | Data do Emprestimo: "+dateFormat.format(empr.getDataDoEmprestimo().getTime())
+						+" | Data de Devolucao: "+dateFormat.format(empr.getDataDaDevolucao().getTime()));
 			}
 		}
 	}
@@ -162,24 +162,20 @@ public class BancoDeDados {
 		
 		
 		for(int i=0;i<size;i++) {
-			
-			
-			
-			
 			emp = user.getEmprestimosAtivos().get(i);
 			System.out.println("   + Titulo: "+emp.getLivro().getTitulo()
-					+"| Data do Emprestimo: "+dateFormat.format(emp.getDataDoEmprestimo().getTime())
-					+"| Data de Devolucao: "+dateFormat.format(emp.getDataDaDevolucao().getTime())
-					+"| Status: "+(emp.isFinalizado()?"Finalizado":"Em aberto"));
+					+" | Data do Emprestimo: "+dateFormat.format(emp.getDataDoEmprestimo().getTime())
+					+" | Data de Devolucao: "+dateFormat.format(emp.getDataDaDevolucao().getTime())
+					+" | Status: "+(emp.isFinalizado()?"Finalizado":"Em aberto"));
 		}
 		System.out.println("Historico de Emprestimos: ");
 		size = user.getHistoricoEmprestimos().size();
 		for(int i=0;i<size;i++) {
 			emp = user.getHistoricoEmprestimos().get(i);
 			System.out.println("   + Titulo: "+emp.getLivro().getTitulo()
-					+"| Data do Emprestimo: "+dateFormat.format(emp.getDataDoEmprestimo().getTime())
-					+"| Data de Devolucao: "+dateFormat.format(emp.getDataDaDevolucao().getTime())
-					+"| Status: "+(emp.isFinalizado()?"Finalizado":"Em aberto"));
+					+" | Data do Emprestimo: "+dateFormat.format(emp.getDataDoEmprestimo().getTime())
+					+" | Data de Devolucao: "+dateFormat.format(emp.getDataDaDevolucao().getTime())
+					+" | Status: "+(emp.isFinalizado()?"Finalizado":"Em aberto"));
 		}
 		
 		System.out.println("Reservas: ");
@@ -188,7 +184,7 @@ public class BancoDeDados {
 		for(int i =0;i<size;i++) {
 			reserva = user.getReservas().get(i);
 			System.out.println("   + Titulo: "+reserva.getLivro().getTitulo()
-					+"| Data da reserva: "+dateFormat.format(reserva.getDataDaSolicitacao().getTime()));
+					+" | Data da reserva: "+dateFormat.format(reserva.getDataDaSolicitacao().getTime()));
 		}
 	}
 	

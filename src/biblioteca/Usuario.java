@@ -88,7 +88,6 @@ public abstract class Usuario {
 		}
 		
 		 r = new Reserva(livro, this);
-			System.out.println("REserva: "+r.getCodigoDoLivro());
 		addReserva(r);
 		livro.registrarReserva(r);
 		System.out.println("Reserva do livro [" + livro.getTitulo() + "] pelo usuario [" 
