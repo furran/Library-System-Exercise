@@ -1,13 +1,15 @@
-package mata62;
+package biblioteca;
 
 import java.util.Calendar;
 
 public class Reserva {
 	private Livro livro;
+	private Usuario usuario;
 	private Calendar dataDaSolicitacao;
 	
-	public Reserva(Livro livro) {
+	public Reserva(Livro livro, Usuario user) {
 		this.livro = livro;
+		this.usuario = user;
 		this.dataDaSolicitacao = Calendar.getInstance();
 	}
 	
@@ -22,4 +24,9 @@ public class Reserva {
 	public Calendar getDataDaSolicitacao() {
 		return dataDaSolicitacao;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
 }

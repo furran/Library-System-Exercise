@@ -1,18 +1,15 @@
-package mata62;
+package biblioteca;
 
-public class UsuarioProfessor extends Usuario{
-	
+import biblioteca.util.EmprestimoHighPrio;
+import biblioteca.util.Observer;
+
+public class UsuarioProfessor extends Usuario implements Observer{
 	private static int tempoDeEmprestimo = 7;
 	private static int limiteDeEmprestimos = Integer.MAX_VALUE;
+	private int notificacoes;
 	public UsuarioProfessor(String codigo, String nome) {
 		super(codigo, nome, new EmprestimoHighPrio());
-	}
-
-
-	@Override
-	public void consulta() {
-		// TODO Auto-generated method stub
-		
+		notificacoes = 0;
 	}
 
 	@Override
@@ -25,5 +22,15 @@ public class UsuarioProfessor extends Usuario{
 		return limiteDeEmprestimos;
 	}
 
+
+	@Override
+	public void update() {
+		notificacoes++;
+	}
+
+
+	public int getNotificacoes() {
+		return notificacoes;
+	}	
 
 }

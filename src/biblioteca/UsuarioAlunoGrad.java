@@ -1,4 +1,6 @@
-package mata62;
+package biblioteca;
+
+import biblioteca.util.EmprestimoLowPrio;
 
 public class UsuarioAlunoGrad extends Usuario{
 

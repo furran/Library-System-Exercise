@@ -1,8 +1,10 @@
-package mata62;
+package biblioteca;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TreeMap;
+
+import biblioteca.util.EmprestimoBehavior;
 
 public abstract class Usuario {
 	private String codigo;
@@ -22,10 +24,14 @@ public abstract class Usuario {
 		
 	}
 	
-	
-	public abstract void consulta();
 	public abstract int getTempoDeEmprestimo();
 	public abstract int getQuantidadeMaximaDeEmprestimos();
+	
+	
+	public void realizarEmprestimo(Livro livro) {
+		emprestimoBehavior.realizarEmprestimo(livro, this);
+	}
+	
 	
 	public void realizarDevolucao(Livro livro) {
 		Emprestimo e = findEmprestimoAtivo(livro.getCodigo());
@@ -39,51 +45,54 @@ public abstract class Usuario {
 		
 		e.setFinalizado(true);
 		this.emprestimosAtivos.remove(e);
-		e.getLivro().realizarDevolucao(e);
+		livro.realizarDevolucao(e);
 		System.out.println("Devolucao do livro ["+e.getLivro().getTitulo()+"] para o usuario ["
 				+this.getNome()+"] bem sucedida.");
 	}
-	
-	public void registrarEmprestimo(Livro livro) {
-		emprestimoBehavior.realizarEmprestimo(livro, this);
-	}
-	
-	public boolean registrarReserva(Livro livro) {
-		if(reservas.size()>3) {
-			System.out.println(
-					"Falha na reserva do livro ["+livro.getTitulo()
-				+"]: Limite de reservas excedido pelo usuario ["+this.getNome()+"]."
-				);
-			return false;
-		}
+
+	public void realizarReserva(Livro livro) {
 		
 		if(livro == null) {
 			System.out.println(
 					"Falha na reserva do livro pelo usuario ["+this.getNome()+"]: Este livro nao existe."
 				);
+			return;
 		}
 		
-		Reserva r = new Reserva(livro);
 		
+		if(reservas.size()>=3) {
+			System.out.println(
+					"Falha na reserva do livro ["+livro.getTitulo()
+				+"]: Limite de reservas excedido pelo usuario ["+this.getNome()+"]."
+				);
+			return;
+		}
+		Reserva r = findReserva(livro.getCodigo());
+		
+		if(r!=null) {
+			System.out.println(
+					"Falha na reserva do livro ["+livro.getTitulo()
+				+"]: O usuario ["+this.getNome()+"] ja reservou esse livro."
+				);
+			return;
+		}
+		
+		Emprestimo e = findEmprestimoAtivo(livro.getCodigo());
+		
+		if(e!=null) {
+			System.out.println(
+					"Falha na reserva do livro ["+livro.getTitulo()
+				+"]: O usuario ["+this.getNome()+"] ja tem um emprestimo desse livro."
+				);
+			return;
+		}
+		
+		 r = new Reserva(livro, this);
+			System.out.println("REserva: "+r.getCodigoDoLivro());
 		addReserva(r);
 		livro.registrarReserva(r);
 		System.out.println("Reserva do livro [" + livro.getTitulo() + "] pelo usuario [" 
 		+ this.getNome() + "] bem sucedida");
-		
-		return true;
-	}
-	
-	public void listarEmprestimos() {
-		System.out.println("Historico de Emprestimos:");
-		for(Emprestimo emp : historicoEmprestimos) {
-			System.out.println();
-		}
-	}
-	
-	public void listarReservas() {
-		for(Reserva r : reservas) {
-			System.out.println("Titulo: ");
-		}
 	}
 	
 	public boolean temEmprestimoAtrasado() {
@@ -96,15 +105,39 @@ public abstract class Usuario {
 		return false;
 	}
 	
-	protected void addReserva(Reserva r) {
+	
+	public Reserva findReserva(String codigoDoLivro) {
+		for(Reserva r : reservas) {
+			if(r.getCodigoDoLivro().equals(codigoDoLivro)) {
+				return r; 
+			}
+		}
+		return null;
+	}
+	
+	public Emprestimo findEmprestimoAtivo(String codigoDoLivro) {
+		for(Emprestimo e : emprestimosAtivos) {
+			if(e.getCodigoDoLivro().equals(codigoDoLivro)) {
+				return e; 
+			}
+		}
+		return null;
+	}
+
+	
+	public void addReserva(Reserva r) {
 		reservas.add(r);
 	}
 	
-	protected void addEmprestimoAtivo(Emprestimo e) {
+	public void removeReserva(Reserva r) {
+		reservas.remove(r);
+	}
+	
+	public void addEmprestimoAtivo(Emprestimo e) {
 		emprestimosAtivos.add(e);
 	}
 	
-	protected void addHistoricoEmprestimo(Emprestimo e) {
+	public void addHistoricoEmprestimo(Emprestimo e) {
 		historicoEmprestimos.add(e);
 	}
 	
@@ -131,24 +164,6 @@ public abstract class Usuario {
 
 	public ArrayList<Emprestimo> getHistoricoEmprestimos() {
 		return historicoEmprestimos;
-	}
-	
-	public Reserva findReserva(String codigoDoLivro) {
-		for(Reserva r : reservas) {
-			if(r.getCodigoDoLivro().equals(codigoDoLivro)) {
-				return r; 
-			}
-		}
-		return null;
-	}
-	
-	public Emprestimo findEmprestimoAtivo(String codigoDoLivro) {
-		for(Emprestimo e : emprestimosAtivos) {
-			if(e.getCodigoDoLivro().equals(codigoDoLivro)) {
-				return e; 
-			}
-		}
-		return null;
 	}
 
 	public ArrayList<Emprestimo> getEmprestimosAtivos() {

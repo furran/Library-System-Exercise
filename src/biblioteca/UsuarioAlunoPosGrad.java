@@ -1,4 +1,6 @@
-package mata62;
+package biblioteca;
+
+import biblioteca.util.EmprestimoLowPrio;
 
 public class UsuarioAlunoPosGrad extends Usuario{
 	
@@ -18,12 +20,5 @@ public class UsuarioAlunoPosGrad extends Usuario{
 	public int getQuantidadeMaximaDeEmprestimos() {
 		return limiteDeEmprestimos;
 	}
-
-
-	@Override
-	public void consulta() {
-
-	}
-
 
 }

@@ -1,4 +1,10 @@
-package mata62;
+package biblioteca.util;
+
+import biblioteca.Emprestimo;
+import biblioteca.Exemplar;
+import biblioteca.Livro;
+import biblioteca.Reserva;
+import biblioteca.Usuario;
 
 public class EmprestimoLowPrio implements EmprestimoBehavior {
 
@@ -38,8 +44,12 @@ public class EmprestimoLowPrio implements EmprestimoBehavior {
 			return;
 		}
 		
-		Emprestimo e = new Emprestimo(exemplar,user);
+		Emprestimo e = new Emprestimo(livro,exemplar,user);
 		livro.registrarEmprestimo(e);
+		if(r!=null) {
+			livro.removeReserva(r); //remove a reserva se houver
+			user.removeReserva(r);
+		}
 		user.addEmprestimoAtivo(e);
 		user.addHistoricoEmprestimo(e);
 		

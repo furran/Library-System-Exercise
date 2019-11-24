@@ -1,12 +1,17 @@
-package mata62;
+package biblioteca;
 
 public class Exemplar {
 	private String codigo;
 	private boolean disponivel;
 	
-	public Exemplar(Livro livro,String codigo, boolean status) {
+	public Exemplar(String codigo, boolean status) {
 		this.codigo = codigo;
 		this.disponivel = status;
+	}
+	
+	public Exemplar(String codigo) {
+		this.codigo = codigo;
+		this.disponivel = true;
 	}
 	
 	public Exemplar(Livro livro,String codigo) {
@@ -25,6 +30,10 @@ public class Exemplar {
 	}
 	public void setDisponivel(boolean status) {
 		this.disponivel = status;
+	}
+	
+	public String consulta() {
+		return "Codigo: ["+codigo+"] "+((isDisponivel())?"Disponivel":"Emprestado");
 	}
 	
 }

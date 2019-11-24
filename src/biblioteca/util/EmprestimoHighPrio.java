@@ -1,4 +1,10 @@
-package mata62;
+package biblioteca.util;
+
+import biblioteca.Emprestimo;
+import biblioteca.Exemplar;
+import biblioteca.Livro;
+import biblioteca.Reserva;
+import biblioteca.Usuario;
 
 public class EmprestimoHighPrio implements EmprestimoBehavior {
 
@@ -17,10 +23,15 @@ public class EmprestimoHighPrio implements EmprestimoBehavior {
 			return;
 		}
 		
-		Emprestimo e = new Emprestimo(exemplar,user);
+		Emprestimo e = new Emprestimo(livro,exemplar,user);
 		livro.registrarEmprestimo(e);
 		user.addEmprestimoAtivo(e);
 		user.addHistoricoEmprestimo(e);
+		Reserva r = user.findReserva(livro.getCodigo());
+		if(r!=null) {
+			livro.removeReserva(r); //remove a reserva se houver
+			user.removeReserva(r);
+		}
 		
 		System.out.println("Emprestimo do livro ["+livro.getTitulo()+"] para o usuario ["
 				+user.getNome()+"] bem sucedido.");
