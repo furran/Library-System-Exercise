@@ -1,22 +1,22 @@
 package sistema.comandos;
 
-import biblioteca.BancoDeDados;
+import biblioteca.Biblioteca;
 
 public abstract class Command {
 	
-	private BancoDeDados base;
+	private Biblioteca base;
 	
-	public Command(BancoDeDados b) {
+	public Command(Biblioteca b) {
 		this.base = b;
 	}
 	
 	public abstract void execute(Object arg);
 
-	public BancoDeDados getBase() {
+	public Biblioteca getBase() {
 		return base;
 	}
 
-	public void setBase(BancoDeDados base) {
+	public void setBase(Biblioteca base) {
 		this.base = base;
 	}
 	

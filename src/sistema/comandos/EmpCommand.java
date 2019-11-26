@@ -1,11 +1,11 @@
 package sistema.comandos;
 
-import biblioteca.BancoDeDados;
+import biblioteca.Biblioteca;
 
 public class EmpCommand extends Command{
 	
-	public EmpCommand(BancoDeDados b) {
-		super(b);
+	public EmpCommand() {
+		super(Biblioteca.getInstance());
 	}
 
 	@Override

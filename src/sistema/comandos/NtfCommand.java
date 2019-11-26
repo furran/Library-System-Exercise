@@ -1,13 +1,11 @@
 package sistema.comandos;
 
-import biblioteca.BancoDeDados;
+import biblioteca.Biblioteca;
 
 public class NtfCommand extends Command{
 	
-	
-
-	public NtfCommand(BancoDeDados b) {
-		super(b);
+	public NtfCommand() {
+		super(Biblioteca.getInstance());
 	}
 
 	@Override

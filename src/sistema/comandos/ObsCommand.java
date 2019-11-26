@@ -1,12 +1,12 @@
 package sistema.comandos;
 
-import biblioteca.BancoDeDados;
+import biblioteca.Biblioteca;
 
 public class ObsCommand extends Command {
 	
 	
-	public ObsCommand(BancoDeDados b) {
-		super(b);
+	public ObsCommand() {
+		super(Biblioteca.getInstance());
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import sistema.comandos.Sistema;
 public class Aplicacao {
 	public static void main(String args[]) {
 		System.out.println("Inicializando...");
-		Sistema sys = Sistema.getInstance();
+		Sistema sys = new Sistema();
 		Scanner sc = new Scanner(System.in);
 		String line;
 		String cmd[];

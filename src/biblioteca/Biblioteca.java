@@ -6,14 +6,14 @@ import java.util.TreeMap;
 
 import biblioteca.util.Observer;
 
-public class BancoDeDados {
-	private static BancoDeDados instance;
+public class Biblioteca {
+	private static Biblioteca instance;
 	private TreeMap<String,Livro> livros; //mapeia codigo do livro para o livro.
 	private TreeMap<String,Usuario> usuarios; //mapeia o codigo do usuario para o usuario.
 	
 	private DateFormat dateFormat;
 	
-	private BancoDeDados() {
+	private Biblioteca() {
 		livros = new TreeMap<String,Livro>();
 		usuarios = new TreeMap<String,Usuario>();
 		dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -54,9 +54,9 @@ public class BancoDeDados {
 		addLivro(livro);
 	}
 	
-	public static BancoDeDados getInstance() {
+	public static Biblioteca getInstance() {
 		if(instance == null) {
-			instance = new BancoDeDados();
+			instance = new Biblioteca();
 		}
 		return instance;
 	}
@@ -122,29 +122,7 @@ public class BancoDeDados {
 			System.out.println("Este livro nao existe.");
 			return;
 		}
-		
-		System.out.println("Titulo: "+livro.getTitulo());
-		int resSize = livro.getReservas().size();
-		
-		System.out.println("Usuarios com Reservas: "+resSize);
-		for(int i=0;i<resSize;i++) {
-			System.out.println("   + "+livro.getReservas().get(i).getUsuario().getNome());
-		}
-		
-		int exemplaresSize = livro.getExemplares().size();
-		System.out.println("Exemplares: "+exemplaresSize);
-		Exemplar exemplar;
-		Emprestimo empr;
-		for(int i=0;i<exemplaresSize;i++) {
-			exemplar = livro.getExemplares().get(i);
-			System.out.println("   + "+exemplar.consulta());
-			if(exemplar.isDisponivel()==false) {
-				empr = livro.findEmprestimo(exemplar.getCodigo());
-				System.out.println("     - Usuario: "+empr.getUsuario().getNome()
-						+" | Data do Emprestimo: "+dateFormat.format(empr.getDataDoEmprestimo().getTime())
-						+" | Data de Devolucao: "+dateFormat.format(empr.getDataDaDevolucao().getTime()));
-			}
-		}
+		livro.consulta();
 	}
 	
 	public void consultarUsuario(String codigoDoUsuario) {
@@ -154,38 +132,7 @@ public class BancoDeDados {
 			System.out.println("Este usuario nao existe.");
 			return;
 		}
-		
-		System.out.println("Emprestimos Ativos: ");
-		int size =user.getEmprestimosAtivos().size();
-		Emprestimo emp;
-		
-		
-		
-		for(int i=0;i<size;i++) {
-			emp = user.getEmprestimosAtivos().get(i);
-			System.out.println("   + Titulo: "+emp.getLivro().getTitulo()
-					+" | Data do Emprestimo: "+dateFormat.format(emp.getDataDoEmprestimo().getTime())
-					+" | Data de Devolucao: "+dateFormat.format(emp.getDataDaDevolucao().getTime())
-					+" | Status: "+(emp.isFinalizado()?"Finalizado":"Em aberto"));
-		}
-		System.out.println("Historico de Emprestimos: ");
-		size = user.getHistoricoEmprestimos().size();
-		for(int i=0;i<size;i++) {
-			emp = user.getHistoricoEmprestimos().get(i);
-			System.out.println("   + Titulo: "+emp.getLivro().getTitulo()
-					+" | Data do Emprestimo: "+dateFormat.format(emp.getDataDoEmprestimo().getTime())
-					+" | Data de Devolucao: "+dateFormat.format(emp.getDataDaDevolucao().getTime())
-					+" | Status: "+(emp.isFinalizado()?"Finalizado":"Em aberto"));
-		}
-		
-		System.out.println("Reservas: ");
-		size = user.getReservas().size();
-		Reserva reserva;
-		for(int i =0;i<size;i++) {
-			reserva = user.getReservas().get(i);
-			System.out.println("   + Titulo: "+reserva.getLivro().getTitulo()
-					+" | Data da reserva: "+dateFormat.format(reserva.getDataDaSolicitacao().getTime()));
-		}
+		user.consulta();
 	}
 	
 	public void consultarNotificacoes(String codigoDoUsuario) {

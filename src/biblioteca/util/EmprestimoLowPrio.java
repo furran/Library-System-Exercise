@@ -32,9 +32,9 @@ public class EmprestimoLowPrio implements EmprestimoBehavior {
 		
 		Reserva r = user.findReserva(codigoDoLivro);
 		
-		if(livro.getReservas().size() >= livro.getExemplares().size() && r==null) {//iv e v) Reserva maior/igual ao o numero de exemplares e usuario sem reserva
+		if(livro.getReservas().size()+livro.getEmprestimos().size() >= livro.getExemplares().size() && r==null) {//iv e v) Reserva maior/igual ao o numero de exemplares e usuario sem reserva
 			System.out.println("Erro no emprestimo do livro ["+livro.getTitulo()+"] para o usuario ["
-					+user.getNome()+"]: O numero de reservas excede o de exemplares.");
+					+user.getNome()+"]: O numero de reservas e emprestimos excede o de exemplares.");
 			return;
 		}
 		

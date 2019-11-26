@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TreeMap;
 
+import biblioteca.util.DataFormato;
 import biblioteca.util.EmprestimoBehavior;
 
 public abstract class Usuario {
@@ -27,7 +28,6 @@ public abstract class Usuario {
 	public abstract int getTempoDeEmprestimo();
 	public abstract int getQuantidadeMaximaDeEmprestimos();
 	
-	
 	public void realizarEmprestimo(Livro livro) {
 		emprestimoBehavior.realizarEmprestimo(livro, this);
 	}
@@ -44,6 +44,7 @@ public abstract class Usuario {
 		}
 		
 		e.setFinalizado(true);
+		e.setDataDaDevolucao(Calendar.getInstance());
 		this.emprestimosAtivos.remove(e);
 		livro.realizarDevolucao(e);
 		System.out.println("Devolucao do livro ["+e.getLivro().getTitulo()+"] para o usuario ["
@@ -102,6 +103,38 @@ public abstract class Usuario {
 			}
 		}
 		return false;
+	}
+	
+	public void consulta() {
+		
+		System.out.println("Emprestimos Ativos: ");
+		int size =this.getEmprestimosAtivos().size();
+		Emprestimo emp;	
+		for(int i=0;i<size;i++) {
+			emp = this.getEmprestimosAtivos().get(i);
+			System.out.println("   + Titulo: "+emp.getLivro().getTitulo()
+					+" | Data do Emprestimo: "+DataFormato.formatar(emp.getDataDoEmprestimo().getTime())
+					+" | Data de Devolucao: "+DataFormato.formatar(emp.getDataDaDevolucao().getTime())
+					+" | Status: "+(emp.isFinalizado()?"Finalizado":"Em aberto"));
+		}
+		System.out.println("Historico de Emprestimos: ");
+		size = this.getHistoricoEmprestimos().size();
+		for(int i=0;i<size;i++) {
+			emp = this.getHistoricoEmprestimos().get(i);
+			System.out.println("   + Titulo: "+emp.getLivro().getTitulo()
+					+" | Data do Emprestimo: "+DataFormato.formatar(emp.getDataDoEmprestimo().getTime())
+					+" | Data de Devolucao: "+DataFormato.formatar(emp.getDataDaDevolucao().getTime())
+					+" | Status: "+(emp.isFinalizado()?"Finalizado":"Em aberto"));
+		}
+		
+		System.out.println("Reservas: ");
+		size = this.getReservas().size();
+		Reserva reserva;
+		for(int i =0;i<size;i++) {
+			reserva = this.getReservas().get(i);
+			System.out.println("   + Titulo: "+reserva.getLivro().getTitulo()
+					+" | Data da reserva: "+DataFormato.formatar(reserva.getDataDaSolicitacao().getTime()));
+		}
 	}
 	
 	

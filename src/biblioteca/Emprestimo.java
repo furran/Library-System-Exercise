@@ -63,6 +63,11 @@ public class Emprestimo {
 		return dataDaDevolucao;
 	}
 
+	public void setDataDaDevolucao(Calendar dataDaDevolucao) {
+		this.dataDaDevolucao = dataDaDevolucao;
+	}
+
+
 	public boolean isFinalizado() {
 		return finalizado;
 	}

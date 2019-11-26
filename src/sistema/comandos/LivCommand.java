@@ -1,11 +1,11 @@
 package sistema.comandos;
 
-import biblioteca.BancoDeDados;
+import biblioteca.Biblioteca;
 
 public class LivCommand extends Command{
 
-	public LivCommand(BancoDeDados b) {
-		super(b);
+	public LivCommand() {
+		super(Biblioteca.getInstance());
 	}
 
 	@Override

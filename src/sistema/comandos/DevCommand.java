@@ -1,11 +1,11 @@
 package sistema.comandos;
 
-import biblioteca.BancoDeDados;
+import biblioteca.Biblioteca;
 
 public class DevCommand extends Command {
 
-	public DevCommand(BancoDeDados b) {
-		super(b);
+	public DevCommand() {
+		super(Biblioteca.getInstance());
 	}
 	@Override
 	public void execute(Object arg) {

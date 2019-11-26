@@ -3,6 +3,7 @@ package biblioteca;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import biblioteca.util.DataFormato;
 import biblioteca.util.Observer;
 import biblioteca.util.Subject;
 
@@ -20,7 +21,7 @@ public class Livro implements Subject{
 	private ArrayList<Exemplar> exemplares;
 	private ArrayList<Emprestimo> emprestimos;
 	private ArrayList<Reserva> reservas;
-	
+
 	public Livro(String codigo, String titulo, String editora, String autores, String edicao, int ano) {
 		this.codigo = codigo;
 		this.titulo = titulo;
@@ -51,6 +52,31 @@ public class Livro implements Subject{
 	public void realizarDevolucao(Emprestimo e) {
 		e.getExemplar().setDisponivel(true);
 		removeEmprestimo(e);
+	}
+	
+	public void consulta(){
+		System.out.println("Titulo: "+this.getTitulo());
+		int resSize = this.getReservas().size();
+		
+		System.out.println("Usuarios com Reservas: "+resSize);
+		for(int i=0;i<resSize;i++) {
+			System.out.println("   + "+this.getReservas().get(i).getUsuario().getNome());
+		}
+		
+		int exemplaresSize = this.getExemplares().size();
+		System.out.println("Exemplares: "+exemplaresSize);
+		Exemplar exemplar;
+		Emprestimo empr;
+		for(int i=0;i<exemplaresSize;i++) {
+			exemplar = this.getExemplares().get(i);
+			System.out.println("   + "+exemplar.consulta());
+			if(exemplar.isDisponivel()==false) {
+				empr = this.findEmprestimo(exemplar.getCodigo());
+				System.out.println("     - Usuario: "+empr.getUsuario().getNome()
+						+" | Data do Emprestimo: "+DataFormato.formatar(empr.getDataDoEmprestimo().getTime())
+						+" | Data de Devolucao: "+DataFormato.formatar(empr.getDataDaDevolucao().getTime()));
+			}
+		}
 	}
 	
 	public Exemplar findExemplar(String codigo) {
@@ -155,9 +181,13 @@ public class Livro implements Subject{
 	public int getAno() {
 		return ano;
 	}
-
+	
 	public ArrayList<Exemplar> getExemplares() {
 		return exemplares;
+	}
+	
+	public ArrayList<Emprestimo> getEmprestimos(){
+		return emprestimos;
 	}
 
 	public ArrayList<Reserva> getReservas() {

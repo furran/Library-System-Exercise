@@ -1,11 +1,11 @@
 package sistema.comandos;
 
-import biblioteca.BancoDeDados;
+import biblioteca.Biblioteca;
 
 public class SaiCommand extends Command{
 
-	public SaiCommand(BancoDeDados b) {
-		super(b);
+	public SaiCommand() {
+		super(Biblioteca.getInstance());
 	}
 
 	@Override

@@ -1,12 +1,12 @@
 package sistema.comandos;
 
-import biblioteca.BancoDeDados;
+import biblioteca.Biblioteca;
 
 public class ResCommand extends Command {
 
 
-	public ResCommand(BancoDeDados b) {
-		super(b);
+	public ResCommand() {
+		super(Biblioteca.getInstance());
 	}
 
 	@Override
