@@ -1,7 +1,5 @@
 package biblioteca;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.TreeMap;
 
 import biblioteca.util.Observer;
@@ -10,13 +8,10 @@ public class Biblioteca {
 	private static Biblioteca instance;
 	private TreeMap<String,Livro> livros; //mapeia codigo do livro para o livro.
 	private TreeMap<String,Usuario> usuarios; //mapeia o codigo do usuario para o usuario.
-	
-	private DateFormat dateFormat;
-	
+
 	private Biblioteca() {
 		livros = new TreeMap<String,Livro>();
 		usuarios = new TreeMap<String,Usuario>();
-		dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		preload();
 	}
 	

@@ -1,8 +1,6 @@
 package biblioteca;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
-
 import biblioteca.util.DataFormato;
 import biblioteca.util.Observer;
 import biblioteca.util.Subject;

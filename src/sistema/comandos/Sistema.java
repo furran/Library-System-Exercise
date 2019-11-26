@@ -3,8 +3,6 @@ package sistema.comandos;
 import java.util.HashMap;
 import java.util.Locale;
 
-import biblioteca.Biblioteca;
-
 public class Sistema {
 	private HashMap<String,Command> cmds;
 	

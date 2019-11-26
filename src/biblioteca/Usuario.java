@@ -2,8 +2,6 @@ package biblioteca;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.TreeMap;
-
 import biblioteca.util.DataFormato;
 import biblioteca.util.EmprestimoBehavior;
 
@@ -106,7 +104,7 @@ public abstract class Usuario {
 	}
 	
 	public void consulta() {
-		
+		System.out.println("Nome do Usuario: "+this.getNome());
 		System.out.println("Emprestimos Ativos: ");
 		int size =this.getEmprestimosAtivos().size();
 		Emprestimo emp;	
