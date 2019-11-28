@@ -35,7 +35,7 @@ public abstract class Usuario {
 		Emprestimo e = findEmprestimoAtivo(livro.getCodigo());
 		
 		if(e==null) {
-			System.out.println("Erro na devolucao do livro ["+livro.getTitulo()+"] para o usuario ["
+			System.out.println("Erro na devolucao do livro ["+livro.getTitulo()+"] pelo usuario ["
 					+this.getNome()+"]: O usuario nao tem um emprestimo deste livro.");
 			
 			return;
@@ -45,7 +45,7 @@ public abstract class Usuario {
 		e.setDataDaDevolucao(Calendar.getInstance());
 		this.emprestimosAtivos.remove(e);
 		livro.realizarDevolucao(e);
-		System.out.println("Devolucao do livro ["+e.getLivro().getTitulo()+"] para o usuario ["
+		System.out.println("Devolucao do livro ["+e.getLivro().getTitulo()+"] pelo usuario ["
 				+this.getNome()+"] bem sucedida.");
 	}
 
