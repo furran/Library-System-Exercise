@@ -29,6 +29,6 @@ public class Sistema {
 			System.out.println("Comando ["+cmd+"] invalido.");
 			return;
 		}
-		cmds.get(cmd).execute(args);
+		com.execute(args);
 	}
 }
